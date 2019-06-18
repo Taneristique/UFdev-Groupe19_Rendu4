@@ -1,103 +1,96 @@
-set echo on
-drop table Utilisateur cascade constraint ;
-drop table Plante    cascade constraint ; 
-drop table Entretien cascade  constraint ;
+create database plante_connectee;
+connect plante_connectee;
 
 create table Utilisateur(
-Id_Utilisateur int not null,
+Id_Utilisateur int not null AUTO_INCREMENT,
 Nom_Utilisateur char(10) not null,
 Prenom_Utilisateur char(10) not null,
 Localisation_Utilisateur char(10) not null,
 constraint Pk_Utilisateur primary key (Id_Utilisateur)
 );
-create table Plante(Id_Plante int not null,Nom varchar2(50) not null,
+
+
+create table Plante(Id_Plante int not null,Nom varchar(50) not null,
 Taille_min real null,
 Taille_max real not null,
 Couleur char(30) null,
 Effet_benefique char(36) null,
 Localisation char(120) null,
 Id_Utilisateur  int null,
-constraint Pk_Plante primary key(Id_Plante), 
+constraint Pk_Plante primary key(Id_Plante),
 constraint fk_Plante_Utilisateur foreign key(Id_Utilisateur) references Utilisateur(Id_Utilisateur)
 );
-create table Entretien
-(
-Id_Entretien 	int	not null,
-Témparature_Optimal int not null,
-Luminiosité int not null,
+
+create table Entretien (
+Id_Entretien int  not null,
+TÃ©mparature_Optimal int not null,
+LuminiositÃ© int not null,
 Date_Entretien  date not null,
 Humidite int not null,
 Id_Plante int null,
-constraint Pk_Entretien primary key(Id_Entretien), 
+constraint Pk_Entretien primary key(Id_Entretien),
 constraint fk_Entretien_Plante foreign key(Id_Plante) references Plante(Id_Plante)
 );
---insérer les plantes
-insert into plante values (1,'Orchis de Champagneux',0.10,0.30,'Violet',Null,'France,Turquie,Italie,Espagne,Grèce',Null);
+
+insert into plante values (1,'Orchis de Champagneux',0.10,0.30,'Violet',Null,'France,Turquie,Italie,Espagne,GrÃ¨ce',Null);
 insert into plante values (2,'Orchidee Aerangis Articulata',0.20,0.40,'Blanche',Null,'Comores,Madagascar',Null);
 insert into plante values (3,'Orchis punaise',0.20,0.40,'Rose',Null,'France',Null);
 insert into plante values (4,'Orchis a fleurs laches',0.20,0.40,'Rouge ou Violet',Null,'France',Null);
-insert into plante values (5,'Orchis a long eperon',0.10,0.35,'Violet',Null,'France,Italie,Espagne,Grèce',Null);
-insert into plante values (6,'Orchis bouffon',0.10,0.35,'Rose ou Blanche','Riche en amidon','France,Italie,Espagne,Grèce,Allemagne,Pologne,République Tchèque',Null);
+insert into plante values (5,'Orchis a long eperon',0.10,0.35,'Violet',Null,'France,Italie,Espagne,GrÃ¨ce',Null);
+insert into plante values (6,'Orchis bouffon',0.10,0.35,'Rose ou Blanche','Riche en amidon','France,Italie,Espagne,GrÃ¨ce,Allemagne,Pologne,RÃ©publique TchÃ¨que',Null);
 insert into plante values (7,'Orchis de marais',0.30,0.60,'Rose',Null,'France,Turquie,Iran,Palestine,Caucase,Algerie,Egypte,Libye,Maroc,Tunisie',Null);
 insert into plante values (8,'Orchis papillon',0.10,0.30,'Rose',Null,'France',Null);
-insert into plante values (9,'Orchis de Provences',0.10,0.30,'Rose',Null,'France,Turquie,Italie,Espagne,Grèce',Null);
-insert into plante values (10,'Pereskia',Null,5,'Rose,Rouge,Orange ou Jaune','Source vitamines(A,B et C)','Brésil',Null);
-insert into plante values (11,'Le Figuier de Barbarie',3,5,'Verte','Alimentaire','Brésil,Chilie,Botswana,Lesotho,Namibie,Mozambique,Eswatini,Zimbabwe',Null);
-insert into plante values (12,'Astrophytum asterias',Null,0.5,'Verte',Null,'Méxique,Etats-Unis',Null);
-insert into plante values (13,'Astrophytum ornatum',0.15,1,'Verte',Null,'Méxique',Null);
+insert into plante values (9,'Orchis de Provences',0.10,0.30,'Rose',Null,'France,Turquie,Italie,Espagne,GrÃ¨ce',Null);
+insert into plante values (10,'Pereskia',Null,5,'Rose,Rouge,Orange ou Jaune','Source vitamines(A,B et C)','BrÃ©sil',Null);
+insert into plante values (11,'Le Figuier de Barbarie',3,5,'Verte','Alimentaire','BrÃ©sil,Chilie,Botswana,Lesotho,Namibie,Mozambique,Eswatini,Zimbabwe',Null);
+insert into plante values (12,'Astrophytum asterias',Null,0.5,'Verte',Null,'MÃ©xique,Etats-Unis',Null);
+insert into plante values (13,'Astrophytum ornatum',0.15,1,'Verte',Null,'MÃ©xique',Null);
 insert into plante values (14,'Maihueniopsis darwinii',Null,0.10,'Orange',Null,'Argentine,Chile',Null);
 insert into plante values (15,'Tephrocactus weberi',Null,0.20,'Verte',Null,'Argentine',Null);
 insert into plante values (16,'Tephrocactus alexanderi',Null,0.5,'Blanc,Rose',Null,'Argentine',Null);
-insert into plante values (17,'Dryas integrifolia',0.03,0.08,'Verte','Médicament','Autriche,Hongrie,Pologne,République Tchèque,Slovaquie',Null);
-insert into plante values (18,'Dryade a huit petales',0.1,1,'Blanche','Compose de Tanin et de sels mineraux','Autriche,Hongrie,Pologne,République Tchèque,Slovaquie',Null);
+insert into plante values (17,'Dryas integrifolia',0.03,0.08,'Verte','MÃ©dicament','Autriche,Hongrie,Pologne,RÃ©publique TchÃ¨que,Slovaquie',Null);
+insert into plante values (18,'Dryade a huit petales',0.1,1,'Blanche','Compose de Tanin et de sels mineraux','Autriche,Hongrie,Pologne,RÃ©publique TchÃ¨que,Slovaquie',Null);
 insert into plante values (19,'Alchemille des Champs',0.10,0.50,'Verte',Null,Null,Null);
 insert into plante values (20,'Prunier myrobolan',Null,10,'Blanc','Alimentaire','Algerie,Egypte,Libye,Maroc,Tunisie',Null);
 insert into plante values (21,'Erable champetre',12,15,'Blanc,Rose','Favorise la biodiversite du jardin','France,Allemagne,Hollande,Italie,Pays-Bas,Belgique,Turquie,Iran,Iraque,Chine,Japon',Null);
-insert into plante values (22,'Amelanchier a feuilles ovales',7,10,'Rouge et Noir','Alimentaire','Anguilla,Antigua-et-Barbuda,Curaçao,Pays-Bas caribéens,Aruba,Bahamas,Costa Rica,Canada',Null);
+insert into plante values (22,'Amelanchier a feuilles ovales',7,10,'Rouge et Noir','Alimentaire','Anguilla,Antigua-et-Barbuda,CuraÃ§ao,Pays-Bas caribÃ©ens,Aruba,Bahamas,Costa Rica,Canada',Null);
 insert into plante values (23,'Epine vinette',1.5,3,'Rouge','Digestive d un gout','France',Null);
-insert into plante values (24,'Clematite Vigne-blanche',Null,25,'Vert','Lignifient en vieillissant','France,Allemagne,Hollande,Italie,Autriche,Hongrie,Pologne,République Tchèque,Slovaquie',Null);
-insert into plante values (25,'Le Buis',5,10,'Verte','Effets dépuratifs','Espagne,Portugal,Andorre,Vatican,Italie,Albanie,Bulgarie',Null);
-insert into plante values (26,'Aubepines',6,12,'Blanc ou Rouge',' Fortifiant du c?oeur',Null,Null);
+insert into plante values (24,'Clematite Vigne-blanche',Null,25,'Vert','Lignifient en vieillissant','France,Allemagne,Hollande,Italie,Autriche,Hongrie,Pologne,RÃ©publique TchÃ¨que,Slovaquie',Null);
+insert into plante values (25,'Le Buis',5,10,'Verte','Effets dÃ©puratifs','Espagne,Portugal,Andorre,Vatican,Italie,Albanie,Bulgarie',Null);
+insert into plante values (26,'Aubepines',6,12,'Blanc ou Rouge',' Fortifiant du coeur',Null,Null);
 insert into plante values (27,'Le Houx',2,5,'Rouge','Antirhumatismal',Null,Null);
-insert into plante values (28,'Le Nerprun purgatif',Null,5,'Noir','Toxique','Brésil,Algerie,Egypte,Libye,Maroc,Tunisie',Null);
-insert into plante values (29,'Le faux laurier des bois',1,1.5,'Noir','Toxique','Autriche,Hongrie,Pologne,République Tchèque,Slovaquie',Null);
-insert into plante values (30,'Le faux laurier des bois',1,1.5,'Noir','Toxique','France,Turquie,Allemagne,Belgique,Hollande,Italie,Pays-Bas,Espagne,Autriche,Hongrie,Pologne,République Tchèque,Slovaquie',Null);
---insérer les entretiens
-insert into entretien values(1,20,30,SYSDATE,32,1);
-insert into entretien values(2,18,30,SYSDATE,30,2);
-insert into entretien values(3,20,28,SYSDATE,29,3);
-insert into entretien values(4,35,29,SYSDATE,30,4);
-insert into entretien values(5,20,27,SYSDATE,28,5);
-insert into entretien values(6,0,27,SYSDATE,27,6);
-insert into entretien values(7,35,27,SYSDATE,27,7);
-insert into entretien values(8,20,30,SYSDATE,30,8);
-insert into entretien values(9,20,27,SYSDATE,29,9);
-insert into entretien values(10,20,30,SYSDATE,30,10);
-insert into entretien values(11,20,30,SYSDATE,30,11);
-insert into entretien values(12,2,30,SYSDATE,29,12);
-insert into entretien values(13,21,29,SYSDATE,28,13);
-insert into entretien values(14,-40,10,SYSDATE,0,14);
-insert into entretien values(15,5,29,SYSDATE,28,15);
-insert into entretien values(16,40,30,SYSDATE,30,16);
-insert into entretien values(17,20,29,SYSDATE,29,17);
-insert into entretien values(18,20,30,SYSDATE,36,18);
-insert into entretien values(19,20,20,SYSDATE,21,19);
-insert into entretien values(20,-10,20,SYSDATE,-28,20);
-insert into entretien values(21,-28,31,SYSDATE,30,21);
-insert into entretien values(22,-40,31,SYSDATE,30,22);
-insert into entretien values(23,20,28,SYSDATE,20,23);
-insert into entretien values(24,20,29,SYSDATE,30,24);
-insert into entretien values(25,20,25,SYSDATE,30,25);
-insert into entretien values(26,18,20,SYSDATE,30,26);
-insert into entretien values(27,19,15,SYSDATE,20,27);
-insert into entretien values(28,20,30,SYSDATE,30,28);
-insert into entretien values(29,-40,15,SYSDATE,-30,29);
-insert into entretien values(30,-32,20,SYSDATE,-32,30);
---insérer les utilisateurs
-insert into utilisateur values(1,User,User,'Paris');
-set linesize 1000;
-set pagesize 200;
-select * from utilisateur;
-select * from plante order by 1;
-select * from entretien order by 1;
+insert into plante values (28,'Le Nerprun purgatif',Null,5,'Noir','Toxique','BrÃ©sil,Algerie,Egypte,Libye,Maroc,Tunisie',Null);
+insert into plante values (29,'Le faux laurier des bois',1,1.5,'Noir','Toxique','Autriche,Hongrie,Pologne,RÃ©publique TchÃ¨que,Slovaquie',Null);
+insert into plante values (30,'Le faux laurier des bois',1,1.5,'Noir','Toxique','France,Turquie,Allemagne,Belgique,Hollande,Italie,Pays-Bas,Espagne,Autriche,Hongrie,Pologne,RÃ©publique TchÃ¨que,Slovaquie',Null);
+
+insert into entretien values(1,20,30,SYSDATE(),32,1);
+insert into entretien values(2,18,30,SYSDATE(),30,2);
+insert into entretien values(3,20,28,SYSDATE(),29,3);
+insert into entretien values(4,35,29,SYSDATE(),30,4);
+insert into entretien values(5,20,27,SYSDATE(),28,5);
+insert into entretien values(6,0,27,SYSDATE(),27,6);
+insert into entretien values(7,35,27,SYSDATE(),27,7);
+insert into entretien values(8,20,30,SYSDATE(),30,8);
+insert into entretien values(9,20,27,SYSDATE(),29,9);
+insert into entretien values(10,20,30,SYSDATE(),30,10);
+insert into entretien values(11,20,30,SYSDATE(),30,11);
+insert into entretien values(12,2,30,SYSDATE(),29,12);
+insert into entretien values(13,21,29,SYSDATE(),28,13);
+insert into entretien values(14,-40,10,SYSDATE(),0,14);
+insert into entretien values(15,5,29,SYSDATE(),28,15);
+insert into entretien values(16,40,30,SYSDATE(),30,16);
+insert into entretien values(17,20,29,SYSDATE(),29,17);
+insert into entretien values(18,20,30,SYSDATE(),36,18);
+insert into entretien values(19,20,20,SYSDATE(),21,19);
+insert into entretien values(20,-10,20,SYSDATE(),-28,20);
+insert into entretien values(21,-28,31,SYSDATE(),30,21);
+insert into entretien values(22,-40,31,SYSDATE(),30,22);
+insert into entretien values(23,20,28,SYSDATE(),20,23);
+insert into entretien values(24,20,29,SYSDATE(),30,24);
+insert into entretien values(25,20,25,SYSDATE(),30,25);
+insert into entretien values(26,18,20,SYSDATE(),30,26);
+insert into entretien values(27,19,15,SYSDATE(),20,27);
+insert into entretien values(28,20,30,SYSDATE(),30,28);
+insert into entretien values(29,-40,15,SYSDATE(),-30,29);
+insert into entretien values(30,-32,20,SYSDATE(),-32,30);
 commit;
